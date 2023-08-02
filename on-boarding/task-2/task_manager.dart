@@ -7,6 +7,16 @@ class TaskManager{
     tasks.add(task);
   }
 
+  // Get task by title
+  Task? getTaskByTitle (String title){
+    for (var task in tasks){
+      if (task.title == title){
+        return task;
+      }
+    }
+    return null;
+  }
+
   // view all the tasks
 
   void viewAllTasks(){

@@ -1,6 +1,6 @@
 import 'task.dart';
 import 'task_manager.dart';
-
+// main is updated for testing the rebase functionality for the git best practices task
 void main() {
   TaskManager taskManager = TaskManager();
   var task1 = Task(

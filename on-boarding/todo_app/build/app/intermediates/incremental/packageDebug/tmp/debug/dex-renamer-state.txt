@@ -1,0 +1,4 @@
+#Sat Aug 05 15:09:02 EAT 2023
+base.0=C\:\\Users\\abian\\Projects\\2023-project-phase-mobile-tasks\\on-boarding\\todo_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: ElevatedButton(
                 onPressed: () {
-                  // Get.to(TodoListPage());
+                  Navigator.pushNamed(context, '/todo_list');
                 },
                 child: Text(
                   "Get Started",

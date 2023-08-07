@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CreateNewTask extends StatefulWidget {
   const CreateNewTask({super.key});
@@ -10,9 +8,30 @@ class CreateNewTask extends StatefulWidget {
 }
 
 class _CreateNewTaskState extends State<CreateNewTask> {
+  TextEditingController _taskNameController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+    }
+
+    return selectedDate;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,10 +45,15 @@ class _CreateNewTaskState extends State<CreateNewTask> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.chevron_left,
-                  color: Colors.redAccent,
-                  size: 30,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.chevron_left,
+                    color: Colors.redAccent,
+                    size: 30,
+                  ),
                 ),
                 Text(
                   'Create New Task',
@@ -68,16 +92,15 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 0.5,
-                            blurRadius: 3,
-                            offset: Offset(0, 3),
-                          )
-                        ]
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              spreadRadius: 0.5,
+                              blurRadius: 3,
+                              offset: Offset(0, 3),
+                            )
+                          ]),
                       child: Container(
                         height: 50,
                         width: double.infinity,
@@ -86,20 +109,16 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "UI/UX APP Design",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                        child: TextFormField(
+                          controller: _taskNameController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Enter task name",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
                             ),
-                            SizedBox(
-                              width: 10,
-                            )
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -151,16 +170,24 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "April 20, 2021",
+                               "${selectedDate.toLocal()}".split(' ')[0],
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.grey,
                                 fontSize: 16,
                               ),
                             ),
                             SizedBox(
                               width: 10,
                             ),
-                            Icon(Icons.date_range_outlined,color: Colors.red,)
+                            GestureDetector(
+                              onTap: () {
+                                pickDate(context);
+                              },
+                              child: Icon(
+                                Icons.date_range_outlined,
+                                color: Colors.red,
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -210,11 +237,15 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20)),
-                        child: Text(
-                          "first I have to completed the given task and then I have to submit it to the client.",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
+                        child: TextFormField(
+                          maxLines: 6,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Enter description",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
@@ -240,7 +271,9 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Add Task',
                     style: TextStyle(

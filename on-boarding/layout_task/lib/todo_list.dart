@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'task_detail.dart';
 
 class TodoListPage extends StatefulWidget {
-  const TodoListPage({super.key});
-
   @override
-  State<TodoListPage> createState() => _TodoListPageState();
+  _TodoListPageState createState() => _TodoListPageState();
 }
 
 class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               height: 30,
@@ -24,10 +22,15 @@ class _TodoListPageState extends State<TodoListPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.chevron_left,
-                    color: Colors.redAccent,
-                    size: 30,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.chevron_left,
+                      color: Colors.redAccent,
+                      size: 30,
+                    ),
                   ),
                   Text(
                     'Todo List',
@@ -39,7 +42,7 @@ class _TodoListPageState extends State<TodoListPage> {
                   Icon(
                     Icons.more_vert,
                     color: Colors.black,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -48,9 +51,7 @@ class _TodoListPageState extends State<TodoListPage> {
               height: 150,
               width: 150,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 5),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -65,394 +66,106 @@ class _TodoListPageState extends State<TodoListPage> {
                           fontSize: 18,
                         ),
                       ),
-                      SizedBox(
-                        width: 200,
-                      )
+                      SizedBox(width: 200),
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(31, 170, 168, 168),
-                              blurRadius: 2,
-                              offset: Offset(0, 5),
-                            ),
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 2,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "U",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "UI/UX APP",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Design",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetail(
+                                title: "UI/UX APP Design",
+                                description: "This is the main task...",
+                                deadline: "April 20,2023",
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "April 29,2023",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    width: 3,
-                                    decoration:
-                                        BoxDecoration(color: Colors.redAccent),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                            ),
+                          );
+                        },
+                        child: TaskListItem(
+                          iconColor: Colors.black,
+                          text: "U",
+                          title: "UI/UX APP",
+                          subtitle: "Design",
+                          date: "April 29,2023",
+                          color: Colors.redAccent,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(31, 170, 168, 168),
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            ),
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "V",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "UI/UX APP",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Design",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetail(
+                                title: "UI/UX APP Design",
+                                description: "This is the main task...",
+                                deadline: "April 20,2023",
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "April 29, 2023",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    width: 3,
-                                    decoration:
-                                        BoxDecoration(color: Colors.green),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
+                            ),
+                          );
+                        },
+                        child: TaskListItem(
+                          iconColor: Colors.black,
+                          text: "U",
+                          title: "UI/UX APP",
+                          subtitle: "Design",
+                          date: "April 29,2023",
+                          color: Colors.green,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetail(
+                                title: "View candidates",
+                                description: "This task is about view candidates description for me to complete the task",
+                                deadline: "April 22,2023",
                               ),
-                            ],
-                          ),
+                            ),
+                          );
+                        },
+                        child: TaskListItem(
+                          iconColor: Colors.black,
+                          text: "V",
+                          title: "View candidates",
+                          subtitle: "",
+                          date: "April 29,2023",
+                          color: Colors.yellow,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(31, 170, 168, 168),
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            ),
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "U",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "View candidates",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                ],
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetail(
+                                title: "Football Dribbling",
+                                description: "This task is about football dribbling that helps us to complete the task",
+                                deadline: "April 12,2023",
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "April 29,2023",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    width: 3,
-                                    decoration:
-                                        BoxDecoration(color: Colors.yellow),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(31, 170, 168, 168),
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
                             ),
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "F",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Football",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Drybilling",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "April 29,2023",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    width: 3,
-                                    decoration:
-                                        BoxDecoration(color: Colors.redAccent),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                          );
+                        },
+                        child: TaskListItem(
+                          iconColor: Colors.black,
+                          text: "U",
+                          title: "Football",
+                          subtitle: "Dribbling",
+                          date: "April 29,2023",
+                          color: Colors.redAccent,
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -465,27 +178,140 @@ class _TodoListPageState extends State<TodoListPage> {
                             ),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
-                              onPressed: () {},
+                                backgroundColor: Colors.red,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/create_new_task');
+                              },
                               child: Text(
                                 "Create Task",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w700),
+                                  color: Colors.white,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+class TaskListItem extends StatelessWidget {
+  final Color iconColor;
+  final String text;
+  final String title;
+  final String subtitle;
+  final String date;
+  final Color color;
+
+  TaskListItem({
+    required this.iconColor,
+    required this.text,
+    required this.title,
+    required this.subtitle,
+    required this.date,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(31, 170, 168, 168),
+            blurRadius: 5,
+            offset: Offset(0, 5),
+          ),
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 5,
+            offset: Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: 15),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: iconColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  date,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Container(
+                  height: 35,
+                  width: 3,
+                  decoration: BoxDecoration(
+                    color: color,
+                  ),
+                ),
+                SizedBox(width: 5),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

@@ -13,13 +13,24 @@ void main() {
 
       expect(find.byType(ClipRRect), findsOneWidget);
       expect(find.byType(GestureDetector), findsWidgets);
-      expect(find.byType(TextFormField), findsWidgets);
       expect(find.byType(ElevatedButton), findsOneWidget);
-
 
       await tester.tap(find.text("Add Task"));
       await tester.pumpAndSettle();
     });
+
+    testWidgets("Test TextFormField", (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MaterialApp(
+            home: CreateNewTask(),
+          ),
+        ),
+      );
+      await tester.enterText(find.byKey(const Key('taskName')), "Task1");
+      await tester.pump();
+      expect(find.text("Task1"), findsOneWidget);
+    });    
 
     testWidgets('CreateNewTask pickDate Test', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: CreateNewTask()));
@@ -27,10 +38,8 @@ void main() {
       await tester.tap(find.byIcon(Icons.date_range_outlined));
       await tester.pumpAndSettle();
 
-
       await tester.tap(find.text('OK'));
       await tester.pumpAndSettle();
-
     });
   });
 }

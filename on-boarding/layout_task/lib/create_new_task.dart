@@ -13,7 +13,6 @@ class _CreateNewTaskState extends State<CreateNewTask> {
   DateTime selectedDate = DateTime.now();
 
   Future<DateTime?> pickDate(BuildContext context) async {
-
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -110,6 +109,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          key: const Key('taskName'),
                           controller: _taskNameController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -170,7 +170,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                               "${selectedDate.toLocal()}".split(' ')[0],
+                              "${selectedDate.toLocal()}".split(' ')[0],
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 16,
@@ -238,6 +238,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: Key('description'),
                           maxLines: 6,
                           decoration: InputDecoration(
                             border: InputBorder.none,

@@ -1,34 +1,37 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:layout_task/features/domain/entities/task.dart';
+import 'package:layout_task/features/domain/repository/task_repository.dart';
+import 'package:layout_task/features/domain/usecases/create_task_usecase.dart';
+import 'package:mockito/mockito.dart';
 
-// import 'package:flutter_test/flutter_test.dart'; 
-// import 'package:layout_task/features/domain/entities/task.dart'; 
-// import 'package:layout_task/features/domain/repositories/task_repository.dart'; 
-// import 'package:layout_task/features/domain/usecases/create_task_usecase.dart'; 
-// import 'package:mockito/mockito.dart'; 
+class MockTaskRepository extends Mock implements TaskRepository {}
 
+void main() {
+  late CreateTodoTask createTodoTask;
+  late MockTaskRepository mockTaskRepository;
 
-// class MockTaskRepository extends Mock implements TaskRepository {}
+  setUp(() {
+    mockTaskRepository = MockTaskRepository();
+    createTodoTask = CreateTodoTask(mockTaskRepository);
+  });
 
-// void main(){
-//   late CreateTaskUseCase createTaskUseCase; 
-//   late MockTaskRepository mockTaskRepository;  
+  test("create task use case", () async {
+    final task = TodoTask(
+      id: "1",
+      text: "text",
+      title: "title",
+      subtitle: "subtitle",
+      date: "date",
+      color: Colors.white,
+    );
 
-//   setUp((){
-//     taskRepository = MockTaskRepository();
-//     createTaskUseCase = CreateTaskUseCase(taskRepository:mockTaskRepository);
-//   });  
+    when(mockTaskRepository.createTask(task))
+        .thenAnswer((_) async => Right(task));
 
+    final result = await createTodoTask.call(Params(task: task));
 
-//   test("create task use case", () async {
-//     final task = Task(
-//       title: "title",
-//       // description: "description",
-//       deadline: "deadline",
-//     );
-
-//     when(mockTaskRepository.createTask(task)).thenAnswer((_) async => task);
-
-//     final result = await createTaskUseCase.createTask(task);
-
-//     expect(result, task);
-//   });
-// }
+    expect(result, task);
+  });
+}

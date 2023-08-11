@@ -1,46 +1,5 @@
-lib/
-├── core/
-│   ├── errors/
-│   │   ├── failure.dart
-│   │   └── ...
-│   ├── usecases/
-│   │   ├── usecase.dart
-│   │   └── ...
-├── feature/
-│   ├── todo_task/
-│   │   ├── domain/
-│   │   │   ├── entities/
-│   │   │   │   ├── task.dart
-│   │   │   │   └── ...
-│   │   │   ├── repositories/
-│   │   │   │   ├── task_repository.dart
-│   │   │   │   └── ...
-│   │   │   └── usecases/
-│   │   │       ├── create_task_usecase.dart
-│   │   │       ├── view_all_tasks_usecase.dart
-│   │   │       └── view_task_usecase.dart
-│   │   ├── data/
-│   │   │   ├── repositories/
-│   │   │   │   ├── task_repository_impl.dart
-│   │   │   │   └── ...
-│   │   │   ├── datasources/
-│   │   │   │   ├── local_data_source.dart
-│   │   │   │   └── remote_data_source.dart
-│   │   │   └── models/
-│   │   │       ├── todo_model.dart
-│   │   │       └── ...
-│   │   ├── presentation/
-│   │       ├── pages/
-│   │       │   ├── onboarding.dart
-│   │       │   ├── task_detail_page.dart
-│   │       │   ├── task_list_page.dart
-│   │       │   └── create_task_page.dart
-│   │       ├── widgets/
-│   │           ├── task_card.dart
-│   │           └── ...
-│   │      
-│   │    
-    └── main.dart
+
+![clean_architecture](https://github.com/abi26anamo/2023-project-phase-mobile-tasks/assets/91598495/ff6dfba1-966f-485a-b67c-e8a8f6e2cc37)
 
 
 ![Screenshot 2023-08-04 164736](https://github.com/abi26anamo/2023-project-phase-mobile-tasks/assets/91598495/905f9f27-0a5e-4f27-94d1-d3ebefe8548d)

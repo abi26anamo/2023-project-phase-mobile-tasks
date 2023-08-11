@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:layout_task/create_new_task.dart';
-import 'package:layout_task/todo_list.dart';
+import 'package:layout_task/features/presentation/pages/create_task_page.dart';
+import 'package:layout_task/features/presentation/pages/task_list_page.dart';
+import 'package:layout_task/features/presentation/widgets/task_card.dart';
 
 void main() {
   group("task todo list test", () {
@@ -14,13 +15,13 @@ void main() {
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(GestureDetector), findsWidgets);
       expect(find.byType(Icon), findsWidgets);
-      expect(find.byType(TaskListItem), findsWidgets);
+      expect(find.byType(TaskCard), findsWidgets);
     });
 
     testWidgets('TaskListItem Navigation Test', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: TaskListItem(
+          home: TaskCard(
             iconColor: Colors.black,
             text: "U",
             title: "Football",
@@ -35,7 +36,7 @@ void main() {
     testWidgets('TaskListItem Navigation Test', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: TaskListItem(
+          home: TaskCard(
             iconColor: Colors.black,
             text: "U",
             title: "UI/UX APP",
@@ -61,7 +62,6 @@ void main() {
 
     expect(find.text('Create New Task'), findsOneWidget);
     expect(find.byType(CreateNewTask), findsOneWidget);
-
 
     await tester.tap(find.byIcon(Icons.chevron_left));
     await tester.pumpAndSettle();

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:layout_task/create_new_task.dart';
-import 'package:layout_task/onboarding.dart';
-import 'package:layout_task/task_detail.dart';
-import 'package:layout_task/todo_list.dart';
+
+import 'features/presentation/pages/create_task_page.dart';
+import 'features/presentation/pages/onboarding_page.dart';
+import 'features/presentation/pages/task_list_page.dart';
+
 
 void main() {
   runApp(const MyApp());

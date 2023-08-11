@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:layout_task/create_new_task.dart';
-import 'package:layout_task/todo_list.dart';
+import 'package:layout_task/features/presentation/pages/create_task_page.dart';
 
 void main() {
   group("creat task page", () {

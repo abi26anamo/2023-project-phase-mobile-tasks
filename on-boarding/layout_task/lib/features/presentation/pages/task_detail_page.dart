@@ -4,11 +4,15 @@ class TaskDetail extends StatefulWidget {
   final String title;
   final String description;
   final String deadline;
+  final bool isCompleted;
+  final Function(bool) onCompleteChanged;
 
   TaskDetail({
     required this.title,
     required this.description,
     required this.deadline,
+    required this.isCompleted,
+    required this.onCompleteChanged,
   });
 
   @override
@@ -36,9 +40,6 @@ class _TaskDetailState extends State<TaskDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Container(
               height: 30,
               width: double.infinity,
@@ -56,7 +57,7 @@ class _TaskDetailState extends State<TaskDetail> {
                     ),
                   ),
                   Text(
-                    'Create New Task',
+                    'Task Detail',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -69,9 +70,8 @@ class _TaskDetailState extends State<TaskDetail> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
+            
             Text(
               'Title',
               style: TextStyle(fontSize: 18),
@@ -92,6 +92,8 @@ class _TaskDetailState extends State<TaskDetail> {
               ),
             ),
             SizedBox(height: 20),
+            
+            // Task description input
             Text(
               'Description',
               style: TextStyle(fontSize: 18),
@@ -114,8 +116,9 @@ class _TaskDetailState extends State<TaskDetail> {
               ),
             ),
             SizedBox(height: 20),
+            
             Text(
-              'Deadline',
+              'Due Date',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
@@ -134,15 +137,17 @@ class _TaskDetailState extends State<TaskDetail> {
               ),
             ),
             SizedBox(height: 30),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   onPressed: () {
-                    Navigator.pop(context);
+                    widget.onCompleteChanged(true); 
+                    Navigator.pop(context, true); 
                   },
-                  child: Text('Save'),
+                  child: Text('Mark as Completed'),
                 ),
               ],
             ),

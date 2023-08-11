@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'features/presentation/pages/create_task_page.dart';
-import 'features/presentation/pages/onboarding_page.dart';
-import 'features/presentation/pages/task_list_page.dart';
+import 'features/todo/presentation/pages/create_task_page.dart';
+import 'features/todo/presentation/pages/onboarding_page.dart';
+import 'features/todo/presentation/pages/task_list_page.dart';
 
 
 void main() {

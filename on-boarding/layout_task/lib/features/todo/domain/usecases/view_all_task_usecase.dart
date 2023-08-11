@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:layout_task/core/errors/failure.dart';
 import 'package:layout_task/core/usecases/usecase.dart';
-import 'package:layout_task/features/domain/entities/task.dart';
-import 'package:layout_task/features/domain/repository/task_repository.dart';
+import 'package:layout_task/features/todo/domain/entities/task.dart';
+import 'package:layout_task/features/todo/domain/repository/task_repository.dart';
 
 class ViewAllTasks extends Usecase<List<TodoTask>, NoParams>{
   final TaskRepository taskRepository;

@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout_task/core/usecases/usecase.dart';
-import 'package:layout_task/features/domain/entities/task.dart';
-import 'package:layout_task/features/domain/repository/task_repository.dart';
-import 'package:layout_task/features/domain/usecases/view_all_task_usecase.dart';
+import 'package:layout_task/features/todo/domain/entities/task.dart';
+import 'package:layout_task/features/todo/domain/repository/task_repository.dart';
+import 'package:layout_task/features/todo/domain/usecases/view_all_task_usecase.dart';
 import 'package:mockito/mockito.dart';
 
 class MockTaskRepository extends Mock implements TaskRepository {}
@@ -25,7 +25,7 @@ void main() {
         title: "test",
         subtitle: "ui design",
         date: "12/7/2023",
-        color: Colors.white);
+       );
     final tTodoTaskList = [tTodoTask];
     when(mockTaskRepository.viewAllTasks())
         .thenAnswer((_) async => Right(tTodoTaskList));

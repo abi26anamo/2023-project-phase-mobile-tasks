@@ -7,7 +7,6 @@ class TodoTask extends Equatable {
   final String title;
   final String subtitle;
   final String date;
-  final Color color;
   final bool isCompleted;
 
   TodoTask({
@@ -16,12 +15,11 @@ class TodoTask extends Equatable {
     required this.title,
     required this.subtitle,
     required this.date,
-    required this.color,
     this.isCompleted = false,
   });
 
   @override
-  List<Object?> get props => [id, text, title, subtitle, date, color, isCompleted];
+  List<Object?> get props => [id, text, title, subtitle, date, isCompleted];
 }
 
 

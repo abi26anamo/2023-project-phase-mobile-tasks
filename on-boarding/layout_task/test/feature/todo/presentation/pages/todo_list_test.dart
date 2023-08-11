@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:layout_task/features/presentation/pages/create_task_page.dart';
-import 'package:layout_task/features/presentation/pages/task_list_page.dart';
-import 'package:layout_task/features/presentation/widgets/task_card.dart';
+import 'package:layout_task/features/todo/presentation/pages/create_task_page.dart';
+import 'package:layout_task/features/todo/presentation/pages/task_list_page.dart';
+import 'package:layout_task/features/todo/presentation/widgets/task_card.dart';
 
 void main() {
   group("task todo list test", () {

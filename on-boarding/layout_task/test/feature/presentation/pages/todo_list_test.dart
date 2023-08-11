@@ -28,6 +28,8 @@ void main() {
             subtitle: "Dribbling",
             date: "April 29,2023",
             color: Colors.redAccent,
+            isCompleted: false,
+            onCompleteChanged: (bool) {},
           ),
         ),
       );
@@ -43,6 +45,8 @@ void main() {
             subtitle: "Design",
             date: "April 29,2023",
             color: Colors.redAccent,
+            isCompleted: false,
+            onCompleteChanged: (bool) {},
           ),
         ),
       );

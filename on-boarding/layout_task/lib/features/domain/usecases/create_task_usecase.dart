@@ -11,4 +11,4 @@ class CreateTodoTask {
   Future<Either<Failure,TodoTask>>execute(TodoTask task) async{
     return await taskRepository.createTask(task);
   }
-}    
+}       

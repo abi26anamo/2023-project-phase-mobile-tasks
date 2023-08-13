@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout_task/core/errors/failure.dart';
-import 'package:layout_task/core/platform/network_info.dart';
 import 'package:layout_task/features/todo/data/datasources/task_local_data_source.dart';
 import 'package:layout_task/features/todo/data/datasources/task_remote_data_source.dart';
 import 'package:layout_task/features/todo/data/models/todo_model.dart';
 import 'package:layout_task/features/todo/data/repository/task_repository_Impl.dart';
 import 'package:layout_task/features/todo/domain/entities/task.dart';
 import 'package:mockito/mockito.dart';
+import 'package:layout_task/core/network/network_info.dart';
 
 class MockRemoteDataSource extends Mock implements TaskRemoteDataSource {}
 

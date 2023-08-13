@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
-import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/task.dart';
 import '../../domain/repository/task_repository.dart';
 import '../datasources/task_local_data_source.dart';
 import '../datasources/task_remote_data_source.dart';
 import '../models/todo_model.dart';
+import '../../../../core/network/network_info.dart';
 
 class ServerException implements Exception {}
 

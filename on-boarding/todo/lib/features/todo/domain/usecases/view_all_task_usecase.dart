@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:layout_task/core/errors/failure.dart';
 import 'package:layout_task/core/usecases/usecase.dart';
 import 'package:layout_task/features/todo/domain/entities/task.dart';
@@ -13,6 +12,6 @@ class ViewAllTasks extends Usecase<List<TodoTask>, NoParams>{
   
   @override
   Future<Either<Failure, List<TodoTask>>> call(NoParams params) async{
-    return await taskRepository.viewAllTasks();
+    return await taskRepository.viewAllTask();
   }
 }

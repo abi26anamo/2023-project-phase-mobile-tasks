@@ -12,7 +12,25 @@
 
 To get started with the ToDoTask app, follow these steps:
 
+<<<<<<< HEAD:on-boarding/layout_task/README.md
 1. Clone this repository: `git clone https://github.com/abi26anamo/2023-project-phase-mobile-tasks.git`
 2. Navigate to the project directory: `cd on-boarding/todotask`
 3. Install dependencies: `flutter pub get`
 4. Run the app: `flutter run`
+=======
+
+
+
+
+
+
+
+
+
+
+To use this code ,
+
+1. first clone the repository
+2. on commmand line run flutter pub get,
+3. Finally use flutter run
+>>>>>>> 093fc16 (completed data contracts task):on-boarding/todo/README.md

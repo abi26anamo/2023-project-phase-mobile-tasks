@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout_task/core/usecases/usecase.dart';
 import 'package:layout_task/features/todo/domain/entities/task.dart';
@@ -27,14 +26,14 @@ void main() {
         date: "12/7/2023",
        );
     final tTodoTaskList = [tTodoTask];
-    when(mockTaskRepository.viewAllTasks())
+    when(mockTaskRepository.viewAllTask())
         .thenAnswer((_) async => Right(tTodoTaskList));
 
     final result = await viewAllTasksUsecase.call(NoParams());
 
     expect(result, tTodoTaskList); 
 
-    verify(mockTaskRepository.viewAllTasks());
+    verify(mockTaskRepository.viewAllTask());
     verifyNoMoreInteractions(mockTaskRepository);
   });
 }

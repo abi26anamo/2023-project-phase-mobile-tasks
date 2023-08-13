@@ -90,9 +90,7 @@ class TaskRepositoryImpl implements TaskRepository {
         return Right(createdTask);
       } on ServerException {
         return Left(ServerFailure());
-      } catch (_) {
-        return Left(ServerFailure());
-      }
+      } 
     } else {
       return Left(ServerFailure());
     }

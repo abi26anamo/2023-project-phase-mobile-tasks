@@ -13,7 +13,7 @@ class ViewTask extends Usecase<TodoTask, Params> {
   
   @override
   Future<Either<Failure, TodoTask>> call(Params params) async{
-   return await taskRepository.viewTask(params.id);
+   return await taskRepository.getTask(params.id);
   }
 }
 

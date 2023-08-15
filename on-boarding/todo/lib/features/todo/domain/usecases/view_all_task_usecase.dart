@@ -12,6 +12,6 @@ class ViewAllTasks extends Usecase<List<TodoTask>, NoParams>{
   
   @override
   Future<Either<Failure, List<TodoTask>>> call(NoParams params) async{
-    return await taskRepository.viewAllTask();
+    return await taskRepository.getAllTasks();
   }
 }

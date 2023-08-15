@@ -45,7 +45,7 @@ void main() {
 
     test("should check if the device is online", () {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      repository.viewTask(tId);
+      repository.getTask(tId);
       verify(mockNetworkInfo.isConnected);
     });
 
@@ -55,27 +55,27 @@ void main() {
       });
 
       test("should return remote data", () async {
-        when(mockRemoteDataSource.ViewTask(any))
+        when(mockRemoteDataSource.getTask(tId))
             .thenAnswer((_) async => tTaskModel);
-        final result = await repository.viewTask(tId);
-        verify(mockRemoteDataSource.ViewTask(tId));
+        final result = await repository.getTask(tId);
+        verify(mockRemoteDataSource.getTask(tId));
         expect(result, equals(Right(tTask)));
       });
 
       test("should cache remote data locally", () {
-        when(mockRemoteDataSource.ViewTask(any))
+        when(mockRemoteDataSource.getTask(tId))
             .thenAnswer((_) async => tTaskModel);
-        repository.viewTask(tId);
-        verify(mockRemoteDataSource.ViewTask(tId));
+        repository.getTask(tId);
+        verify(mockRemoteDataSource.getTask(tId));
         verify(mockLocalDataSource.cacheTask(tTaskModel));
       });
 
       test(
           "should return serverfailure when call to remote data is unsecessful",
           () {
-        when(mockRemoteDataSource.ViewTask(any)).thenThrow(ServerException());
-        final result = repository.viewTask(tId);
-        verify(mockRemoteDataSource.ViewTask(tId));
+        when(mockRemoteDataSource.getTask(tId)).thenThrow(ServerException());
+        final result = repository.getTask(tId);
+        verify(mockRemoteDataSource.getTask(tId));
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
@@ -88,20 +88,20 @@ void main() {
 
       test("should return last locally cached data when cached data is present",
           () async {
-        when(mockLocalDataSource.getLastTask())
+        when(mockLocalDataSource.getTask())
             .thenAnswer((_) async => tTaskModel);
-        final result = await repository.viewTask(tId);
+        final result = await repository.getTask(tId);
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(mockLocalDataSource.getLastTask());
+        verify(mockLocalDataSource.getTask());
         expect(result, equals(Right(tTask)));
       });
 
       test("should return cache failure when there is no cached data present",
           () async {
-        when(mockLocalDataSource.getLastTask()).thenThrow(CacheException());
-        final result = await repository.viewTask(tId);
+        when(mockLocalDataSource.getTask()).thenThrow(CacheException());
+        final result = await repository.getTask(tId);
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(mockLocalDataSource.getLastTask());
+        verify(mockLocalDataSource.getTask());
         expect(result, equals(Left(CacheFailure())));
       });
     });

@@ -23,13 +23,13 @@ void main() {
     date: "12/7/2023",
   );
   test("should get a task from the respository", () async {
-    when(mockTaskRepository.viewTask(1))
+    when(mockTaskRepository.getTask(1))
         .thenAnswer((_) async => Right(tTodoTask));
 
-    final result = await viewTaskUsecase.call(Params(id: 1));
+    final result = await viewTaskUsecase(Params(id: 1));
 
     expect(result, tTodoTask);
-    verify(mockTaskRepository.viewTask(1));
+    verify(mockTaskRepository.getTask(1));
     verifyNoMoreInteractions(mockTaskRepository);
   });
 }

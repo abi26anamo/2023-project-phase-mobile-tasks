@@ -19,21 +19,21 @@ void main() {
 
   test("should get all the tasks from the repository", () async {
     final tTodoTask = TodoTask(
-        id: "1",
-        text: "test text",
-        title: "test",
-        subtitle: "ui design",
-        date: "12/7/2023",
-       );
+      id: "1",
+      text: "test text",
+      title: "test",
+      subtitle: "ui design",
+      date: "12/7/2023",
+    );
     final tTodoTaskList = [tTodoTask];
-    when(mockTaskRepository.viewAllTask())
+    when(mockTaskRepository.getAllTasks())
         .thenAnswer((_) async => Right(tTodoTaskList));
 
-    final result = await viewAllTasksUsecase.call(NoParams());
+    final result = await viewAllTasksUsecase(NoParams());
 
-    expect(result, tTodoTaskList); 
+    expect(result, tTodoTaskList);
 
-    verify(mockTaskRepository.viewAllTask());
+    verify(mockTaskRepository.getAllTasks());
     verifyNoMoreInteractions(mockTaskRepository);
   });
 }

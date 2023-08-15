@@ -18,4 +18,4 @@ class CreateTodoTask extends Usecase<TodoTask, Params>{
 class Params {
   final TodoTask task;
   Params({required this.task});
-}   
+}        

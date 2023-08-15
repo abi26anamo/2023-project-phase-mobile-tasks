@@ -23,21 +23,19 @@ class TaskRepositoryImpl implements TaskRepository {
   });
 
   @override
-  Future<Either<Failure, TodoTask>> viewTask(int id) async {
+  Future<Either<Failure, TodoTask>> getTask(int id) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteTask = await remoteDataSource.ViewTask(id);
+        final remoteTask = await remoteDataSource.getTask(id);
         localDataSource.cacheTask(remoteTask);
 
         return Right(remoteTask);
       } on ServerException {
         return Left(ServerFailure());
-      } catch (_) {
-        return Left(ServerFailure());
       }
     } else {
       try {
-        final localTask = await localDataSource.getLastTask();
+        final localTask = await localDataSource.getTask();
         return Right(localTask);
       } on CacheException {
         return Left(CacheFailure());
@@ -48,16 +46,14 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, List<TodoTask>>> viewAllTask() async {
+  Future<Either<Failure, List<TodoTask>>> getAllTasks() async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteTasks = await remoteDataSource.ViewAllTasks();
+        final remoteTasks = await remoteDataSource.getAllTasks();
         localDataSource.cacheAllTask(remoteTasks);
 
         return Right(remoteTasks);
       } on ServerException {
-        return Left(ServerFailure());
-      } catch (_) {
         return Left(ServerFailure());
       }
     } else {
@@ -65,8 +61,6 @@ class TaskRepositoryImpl implements TaskRepository {
         final localTasks = await localDataSource.getAllCachedTasks();
         return Right(localTasks);
       } on CacheException {
-        return Left(CacheFailure());
-      } catch (_) {
         return Left(CacheFailure());
       }
     }
@@ -84,13 +78,45 @@ class TaskRepositoryImpl implements TaskRepository {
           date: task.date,
         );
 
-        final createdTask = await remoteDataSource.CreateTask(todoModel);
+        final createdTask = await remoteDataSource.createTask(todoModel);
         localDataSource.cacheTask(createdTask);
 
         return Right(createdTask);
       } on ServerException {
         return Left(ServerFailure());
-      } 
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteTask(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.deleteTask(id);
+        localDataSource.deleteCachedTask(id);
+
+        return Right(null);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, TodoTask>> updateTask(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final updatedTask = await remoteDataSource.updateTask(id);
+        localDataSource.cacheTask(updatedTask);
+
+        return Right(updatedTask);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
     } else {
       return Left(ServerFailure());
     }

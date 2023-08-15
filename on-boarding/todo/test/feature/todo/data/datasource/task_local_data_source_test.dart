@@ -29,7 +29,7 @@ void main() {
       when(mockSharedPreferences.getString(CACHED_TASK))
           .thenReturn(fixture("todo_cached.json"));
 
-      final result = await datasource.getLastTask();
+      final result = await datasource.getTask();
 
       verify(mockSharedPreferences.getString(CACHED_TASK));
       expect(result, equals(todoModel));
@@ -37,7 +37,7 @@ void main() {
 
     test("should return cacheException when there is no cached task", () {
       when(mockSharedPreferences.getString(CACHED_TASK)).thenReturn(null);
-      final call = datasource.getLastTask;
+      final call = datasource.getTask;
 
       expect(() => call(), throwsA(TypeMatcher<CacheException>));
     });

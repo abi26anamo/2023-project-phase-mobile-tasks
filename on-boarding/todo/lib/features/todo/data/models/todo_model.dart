@@ -28,6 +28,4 @@ class TodoModel extends TodoTask {
       'date': date,
     };
   }
-
-
 }

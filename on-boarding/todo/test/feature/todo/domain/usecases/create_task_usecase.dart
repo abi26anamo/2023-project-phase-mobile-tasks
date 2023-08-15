@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout_task/features/todo/domain/entities/task.dart';
 import 'package:layout_task/features/todo/domain/repository/task_repository.dart';
@@ -29,7 +28,7 @@ void main() {
     when(mockTaskRepository.createTask(task))
         .thenAnswer((_) async => Right(task));
 
-    final result = await createTodoTask.call(Params(task: task));
+    final result = await createTodoTask(Params(task: task));
 
     expect(result, task);
   });

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout_task/features/todo/data/models/todo_model.dart';
 
-import '../../../../fixture/fixure_reader.dart';
+import '../../../../fixtures/fixure_reader.dart';
 
 void main() {
   setUp(() {

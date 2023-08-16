@@ -4,10 +4,8 @@ import 'package:layout_task/core/errors/exception.dart';
 import 'package:layout_task/features/todo/data/datasources/task_local_data_source.dart';
 import 'package:layout_task/features/todo/data/models/todo_model.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../fixture/fixure_reader.dart';
-
-class MockSharedPreferences extends Mock implements SharedPreferences {}
+import '../../../../fixtures/fixure_reader.dart';
+import '../../helpers/mock_shared_preference.mocks.dart';
 
 void main() {
   late MockSharedPreferences mockSharedPreferences;
@@ -19,9 +17,8 @@ void main() {
         TaskLocalDataSourceImpl(sharedPreferences: mockSharedPreferences);
   });
 
-  group("get last task", () {
-    final todoModel =
-        TodoModel.fromJson(json.decode(fixture("todo_cached.json")));
+  group("get  task", () {
+    final todoModel =  TodoModel.fromJson(json.decode(fixture("todo_cached.json")));
 
     test(
         " should return task from sharedpreferences when there is one in cache",
@@ -60,4 +57,4 @@ void main() {
       verify(mockSharedPreferences.setString(CACHED_TASK, expectedJsonString));
     });
   });
-}  
+}

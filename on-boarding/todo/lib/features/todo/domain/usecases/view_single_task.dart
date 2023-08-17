@@ -18,6 +18,6 @@ class ViewTask extends Usecase<TodoTask, Params> {
 }
 
 class Params {
-  final int id;
+  final String id;
   Params({required this.id});
 }

@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:layout_task/core/errors/exception.dart';
-import 'package:layout_task/core/network/network_info.dart';
 import 'package:layout_task/features/todo/data/models/todo_model.dart';
 import 'package:http/http.dart' as http;
 

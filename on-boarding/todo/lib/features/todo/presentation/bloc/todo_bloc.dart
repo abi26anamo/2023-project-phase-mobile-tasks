@@ -1,6 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layout_task/features/todo/presentation/bloc/todo_events.dart';
-import 'package:layout_task/features/todo/presentation/bloc/todo_states.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -9,6 +7,8 @@ import '../../domain/usecases/delete_task_usecase.dart';
 import '../../domain/usecases/update_task_usecase.dart';
 import '../../domain/usecases/view_all_task_usecase.dart';
 import '../../domain/usecases/view_single_task.dart';
+import 'todo_events.dart';
+import 'todo_states.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
@@ -26,75 +26,60 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     required this.updateTodoTask,
     required this.deleteTodoTask,
     required this.viewTask,
-  }) : super(Initial());
+  }) : super(Initial()) {
+    on<CreateTaskEvent>(_onCreateTodoTask);
+    on<UpdateTaskEvent>(_onUpdateTodoTask);
+    on<DeleteTaskEvent>(_onDeleteTodoTask);
+    on<ViewOneTask>(_onViewTodoTask);
+    on<ViewAllTasksEvent>(_onViewAllTodoTask);
+  }
 
-  @override
-  Stream<TodoState> mapEventToState(TodoEvent event) async* {
-    if (event is CreateTaskEvent) {
-      yield Loading();
-      final result =
-          await createTodoTask(CreateTodoParams(task: event.todoTask));
-      yield* result.fold(
-        (failure) async* {
-          Error(message: _mapFailureToMessage(failure));
-        },
-        (task) async* {
-          Created(todoTask: task);
-        },
-      );
-    } else if (event is ViewAllTasks) {
-      yield Loading();
+  void _onCreateTodoTask(CreateTaskEvent event, Emitter<TodoState> emit) async {
+    emit(Loading());
 
-      final result = await viewAllTasks(NoParams());
+    final result = await createTodoTask(CreateTodoParams(task: event.todoTask));
 
-      yield* result.fold(
-        (failure) async* {
-          Error(message: _mapFailureToMessage(failure));
-        },
-        (tasks) async* {
-          ViewAll(todoTasks: tasks);
-        },
-      );
-    } else if (event is ViewOneTask) {
-      yield Loading();
+    result.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (task) => emit(Created(todoTask: task)),
+    );
+  }
 
-      final result = await viewTask(Params(id: event.id));
+  void _onUpdateTodoTask(UpdateTaskEvent event, Emitter<TodoState> emit) async {
+    emit(Loading());
+    final result = await updateTodoTask(Params(id: event.id));
+    result.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (task) => emit(Updated(todoTask: task)),
+    );
+  }
 
-      yield* result.fold(
-        (failure) async* {
-          Error(message: _mapFailureToMessage(failure));
-        },
-        (task) async* {
-          ViewOne(todoTask: task);
-        },
-      );
-    } else if (event is UpdateTaskEvent) {
-      yield Loading();
+  void _onDeleteTodoTask(DeleteTaskEvent event, Emitter<TodoState> emit) async {
+    emit(Loading());
+    final result = await deleteTodoTask(Params(id: event.id));
+    result.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (task) => emit(Deleted()),
+    );
+  }
 
-      final result = await updateTodoTask(Params(id: event.id));
+  void _onViewTodoTask(ViewOneTask event, Emitter<TodoState> emit) async {
+    emit(Loading());
+    final result = await viewTask(Params(id: event.id));
+    result.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (task) => emit(ViewOne(todoTask: task)),
+    );
+  }
 
-      yield* result.fold(
-        (failure) async* {
-          Error(message: _mapFailureToMessage(failure));
-        },
-        (task) async* {
-          Updated(todoTask: task);
-        },
-      );
-    } else if (event is DeleteTaskEvent) {
-      yield Loading();
-
-      final result = await deleteTodoTask(Params(id: event.id));
-
-      yield* result.fold(
-        (failure) async* {
-          Error(message: _mapFailureToMessage(failure));
-        },
-        (task) async* {
-          Deleted();
-        },
-      );
-    }
+  void _onViewAllTodoTask(
+      ViewAllTasksEvent event, Emitter<TodoState> emit) async {
+    emit(Loading());
+    final result = await viewAllTasks(NoParams());
+    result.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (task) => emit(ViewAll(todoTasks: task)),
+    );
   }
 
   String _mapFailureToMessage(Failure failure) {
